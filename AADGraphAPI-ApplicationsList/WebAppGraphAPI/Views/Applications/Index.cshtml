@@ -1,0 +1,46 @@
+﻿@using Microsoft.Azure.ActiveDirectory.GraphClient
+@model IEnumerable<Application>
+
+<h3>/Applications</h3>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="directoryObjects" class="table table-bordered table-striped">
+    <tr>
+        <th>
+            DisplayName
+        </th>
+        <th>
+            ObjectId
+        </th>
+        <th>
+            AppId
+        </th>
+        <th />
+    </tr>
+    @foreach (var item in Model)
+    {
+        var app = item as Application;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => app.DisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => app.ObjectId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => app.AppId)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { objectId = item.ObjectId }) <br />
+                @Html.ActionLink("Add Key", "AddKey", new { objectId = item.ObjectId }) <br />
+            </td>
+        </tr>
+    }
+</table>
+
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in to see applications. Click @Html.ActionLink("here", "Index", "applications", new { reauth = true }, null) to sign-in.</p>
+}

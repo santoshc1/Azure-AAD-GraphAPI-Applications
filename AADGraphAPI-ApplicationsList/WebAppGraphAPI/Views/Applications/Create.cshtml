@@ -1,0 +1,71 @@
+﻿@model Microsoft.Azure.ActiveDirectory.GraphClient.Application
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create Application</title>
+</head>
+
+<body>
+    <h2>Create Application</h2><br />
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Application Parameters</legend>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DisplayName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DisplayName)
+                @Html.ValidationMessageFor(model => model.DisplayName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Homepage)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Homepage)
+                @Html.ValidationMessageFor(model => model.Homepage)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.IdentifierUris[0])
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.IdentifierUris[0])
+                @Html.ValidationMessageFor(model => model.IdentifierUris)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ReplyUrls[0])
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ReplyUrls[0])
+                @Html.ValidationMessageFor(model => model.ReplyUrls[0])
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AvailableToOtherTenants)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.AvailableToOtherTenants)
+                @Html.ValidationMessageFor(model => model.AvailableToOtherTenants)
+            </div>
+
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in. Click @Html.ActionLink("here", "Create", "Applications", new { reauth = true }, null) to sign-in.</p>
+}

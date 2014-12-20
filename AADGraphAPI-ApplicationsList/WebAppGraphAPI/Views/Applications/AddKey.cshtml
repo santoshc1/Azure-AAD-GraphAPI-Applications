@@ -1,0 +1,63 @@
+﻿@model Microsoft.Azure.ActiveDirectory.GraphClient.Application
+
+@{
+    ViewBag.Title = "Add Key";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Add Key</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Application @Model.DisplayName</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.KeyCredentials[0].KeyId)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.KeyCredentials[0].KeyId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.KeyCredentials[0].StartDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.KeyCredentials[0].StartDate)
+            @Html.ValidationMessageFor(model => model.KeyCredentials[0].StartDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.KeyCredentials[0].EndDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.KeyCredentials[0].EndDate)
+            @Html.ValidationMessageFor(model => model.KeyCredentials[0].EndDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.KeyCredentials[0].Value)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.KeyCredentials[0].Value)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in. Click @Html.ActionLink("here", "Edit", "Applications", new { reauth = true }, null) to sign-in.</p>
+}

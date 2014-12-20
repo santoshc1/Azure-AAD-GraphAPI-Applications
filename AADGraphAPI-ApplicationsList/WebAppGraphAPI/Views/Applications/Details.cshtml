@@ -1,0 +1,83 @@
+﻿@using Microsoft.Azure.ActiveDirectory.GraphClient
+@model Application
+
+<h3>/Applications/@Model.DisplayName</h3>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Application</title>
+</head>
+<body>
+    <fieldset>
+        <legend>Application Details</legend>
+        <table id="directoryObjects">
+            <tr>
+                <td style="padding-right:10px">
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.DisplayName)
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.DisplayName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.AppId)
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.AppId)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Homepage)
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Homepage)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.IdentifierUris)
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.IdentifierUris)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.ReplyUrls)
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.ReplyUrls)
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</body>
+</html>
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in. Click @Html.ActionLink("here", "Details", "Applications", new { reauth = true }, null) to sign-in.</p>
+}
